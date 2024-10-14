@@ -30,11 +30,6 @@ public class AdminController {
     }
 
     @GetMapping
-    public String adminPage() {
-        return "admin";
-    }
-
-    @GetMapping("/users")
     public String listUsers(Model model) {
         model.addAttribute("users", userService.getAllUsers());
         return "list";
@@ -48,7 +43,8 @@ public class AdminController {
     }
 
     @PostMapping("/user")
-    public String addUser(@ModelAttribute("user") User user, BindingResult bindingResult, @RequestParam("roles") List<Long> roleIds, Model model) {
+    public String addUser(@ModelAttribute("user") User user, BindingResult bindingResult,
+                          @RequestParam("roles") List<Long> roleIds, Model model) {
         userValidator.validate(user, bindingResult);
         if (bindingResult.hasErrors()) {
             model.addAttribute("roles", roleService.findAllRoles());
@@ -58,7 +54,7 @@ public class AdminController {
         Set<Role> roles = roleService.findRolesByIds(roleIds);
         user.setRoles(roles);
         userService.saveUser(user);
-        return "redirect:/admin/users";
+        return "redirect:/admin";
     }
 
     @GetMapping("/user/{id}")
@@ -74,12 +70,12 @@ public class AdminController {
         Set<Role> roles = roleService.findRolesByIds(roleIds);
         user.setRoles(roles);
         userService.updateUser(id, user);
-        return "redirect:/admin/users";
+        return "redirect:/admin";
     }
 
     @DeleteMapping("/user/{id}")
     public String deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
-        return "redirect:/admin/users";
+        return "redirect:/admin";
     }
 }

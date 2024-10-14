@@ -1,5 +1,6 @@
 package ru.itmentor.spring.boot_security.demo.configs;
 
+;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.core.Authentication;
