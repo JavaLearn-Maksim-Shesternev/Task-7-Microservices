@@ -3,6 +3,7 @@ package ru.itmentor.spring.boot_security.demo.model;
 import jakarta.persistence.*;
 import org.springframework.security.core.GrantedAuthority;
 
+
 @Entity
 @Table(name = "roles")
 public class Role implements GrantedAuthority {

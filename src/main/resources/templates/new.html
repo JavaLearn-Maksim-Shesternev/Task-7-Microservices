@@ -1,25 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Add User</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 </head>
 <body>
 <div class="container">
     <h1 class="mt-5">Add New User</h1>
-    <form action="/users/new" method="post">
+    <form th:action="@{/admin/user}" th:object="${user}" th:method="post">
         <div class="form-group">
-            <label for="name">Name:</label>
-            <input type="text" class="form-control" id="name" name="name" required>
+            <label for="username">Username:</label>
+            <input type="text" class="form-control" id="username" th:field="*{username}" required>
         </div>
         <div class="form-group">
             <label for="email">Email:</label>
-            <input type="email" class="form-control" id="email" name="email" required>
+            <input type="email" class="form-control" id="email" th:field="*{email}" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" th:field="*{password}" required>
+        </div>
+        <div class="form-group">
+            <label>Roles:</label>
+            <div th:each="role : ${roles}">
+                <input type="checkbox" th:field="*{roles}" th:value="${role.id}" th:text="${role.name.replace('ROLE_','')}"/>
+            </div>
         </div>
         <button type="submit" class="btn btn-primary">Save</button>
-        <a href="/users/new" class="btn btn-secondary">Cancel</a>
+        <a href="/admin/users" class="btn btn-secondary">Cancel</a>
     </form>
 </div>
 </body>

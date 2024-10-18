@@ -1,6 +1,8 @@
 package ru.itmentor.spring.boot_security.demo.dao;
 
-import crudapplication.Crud2Boot.model.User;
+
+
+import ru.itmentor.spring.boot_security.demo.model.User;
 
 import java.util.List;
 
