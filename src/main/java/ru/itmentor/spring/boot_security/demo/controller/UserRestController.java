@@ -22,7 +22,7 @@ public class UserRestController {
         this.userService = userService;
     }
 
-    @GetMapping("/profile")
+    @GetMapping
     public ResponseEntity<User> getUserProfile(Principal principal) {
         Optional<User> user = userService.findByUsername(principal.getName());
         return user.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
