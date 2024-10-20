@@ -1,9 +1,10 @@
 package ru.itmentor.spring.boot_security.demo.dao;
 
-import crudapplication.Crud2Boot.model.User;
+
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
+import ru.itmentor.spring.boot_security.demo.model.User;
 
 import java.util.List;
 

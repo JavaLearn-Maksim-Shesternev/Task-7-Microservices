@@ -2,6 +2,7 @@ package ru.itmentor.spring.boot_security.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.itmentor.spring.boot_security.demo.exceptions.ResourceNotFoundException;
 import ru.itmentor.spring.boot_security.demo.model.Role;
 import ru.itmentor.spring.boot_security.demo.repositories.RoleRepository;
 
@@ -25,6 +26,10 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public Set<Role> findRolesByIds(List<Long> roleIds) {
+        Set<Role> roles = new HashSet<>(roleRepository.findAllById(roleIds));
+        if (roles.size() != roleIds.size()) {
+            throw new ResourceNotFoundException("Одна или несколько ролей не найдены");
+        }
         return new HashSet<>(roleRepository.findAllById(roleIds));
     }
 }
